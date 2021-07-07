@@ -1,5 +1,6 @@
 ﻿using DanielXOO.ShopParser.Controller;
 using DanielXOO.ShopParser.Service;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 
@@ -29,7 +30,8 @@ namespace DanielXOO.ShopParser
 
         public string GetData()
         {
-            throw new System.NotImplementedException();
+            WebClient client = new WebClient();
+            return client.DownloadString(Link);
         }
 
         public void CheckPing()
