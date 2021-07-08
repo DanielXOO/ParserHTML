@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using DanielXOO.ShopParser.Controller;
 using DanielXOO.ShopParser.Service;
 
 namespace DanielXOO.ShopParser
@@ -7,15 +8,22 @@ namespace DanielXOO.ShopParser
     {
         static void Main(string[] args)
         {
-            var site = new OpenProvider("https://komp.1k.by/utility-graphicscards/");
-            site.CheckPing();
-            IDataParser info = new ShopParser();
-            var arr = info.FilterData(site);
-            IService Service = new ConsoleService();
-            foreach(var data in arr)
+            IService debug = new ConsoleService();
+
+            string url;
+            debug.Log("Input URL: ", MsgLevel.Success);
+            url = Console.ReadLine();
+            var src = new OpenProvider(url);
+            src.CheckPing();
+            var parser = new ShopParser();
+            foreach (var data in parser.FilterData(src))
             {
-                Service.Log(data.ToString(), MsgLevel.Info);
+                Console.WriteLine(data.SerializeData());
             }
+            debug.Log("Press any key", MsgLevel.Success);
+            _ = Console.ReadKey();
+
+
         }
     }
 }

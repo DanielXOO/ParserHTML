@@ -4,6 +4,6 @@
     {
         string GetRoot(string url);
         string GetCatalogName(string url);
-        string ChangePage(ref string url, int pageNum);
+        string ChangePage(string url, int pageNum);
     }
 }

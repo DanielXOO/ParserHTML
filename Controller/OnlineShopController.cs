@@ -4,14 +4,14 @@ namespace DanielXOO.ShopParser.Controller
 {
     class OnlineShopController : IController
     {
-        public string ChangePage(ref string url, int pageNum) 
-            => url += $"page{pageNum}";
-        
+        public string ChangePage(string url, int pageNum)
+            => GetRoot(url) + $"page{pageNum}";
+
 
         public string GetCatalogName(string url)
         {
             var regex = new Regex(@"[/]\w+[-]\w+[/]");
-            return ((regex.Match(url)).Value).Replace('/',' ');
+            return ((regex.Match(url)).Value).Replace('/', ' ');
         }
 
         public string GetRoot(string url)

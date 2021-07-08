@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace DanielXOO.ShopParser.Service
+﻿namespace DanielXOO.ShopParser.Service
 {
     enum MsgLevel
     {
-        Info,
+        Success,
         Warning,
-        Error
+        Error,
     }
 }

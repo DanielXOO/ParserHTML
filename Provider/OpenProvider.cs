@@ -6,7 +6,6 @@ using System.Text;
 
 namespace DanielXOO.ShopParser
 {
-
     class OpenProvider : IDataProvider
     {
         private IService Service;
@@ -31,7 +30,15 @@ namespace DanielXOO.ShopParser
         public string GetData()
         {
             WebClient client = new WebClient();
-            return client.DownloadString(Link);
+            try
+            {
+                return client.DownloadString(Link);
+            }
+            catch (System.Net.WebException ex)
+            {
+                Service.Log(ex.Message, MsgLevel.Error);
+                return null;
+            }
         }
 
         public void CheckPing()
@@ -42,13 +49,12 @@ namespace DanielXOO.ShopParser
             try
             {
                 PingReply reply = send.Send(URL.GetRoot(Link), timeout: 120, buf);
-                if (reply.Status  == IPStatus.Success)
+                if (reply.Status == IPStatus.Success)
                 {
-                    Service.Log($"Address: {Link}", MsgLevel.Info);
-                    Service.Log($"RoundTrip time:: {reply.RoundtripTime}", MsgLevel.Info);
-                    Service.Log($"Time to live: {reply.Options.Ttl}", MsgLevel.Info);
-                    Service.Log($"Don't Fragment: { reply.Options.DontFragment}", MsgLevel.Info);
-                    Service.Log($"Connected!", MsgLevel.Info);
+                    Service.Log($"Address: {Link}", MsgLevel.Success);
+                    Service.Log($"RoundTrip time:: {reply.RoundtripTime}", MsgLevel.Success);
+                    Service.Log($"Time to live: {reply.Options.Ttl}", MsgLevel.Success);
+                    Service.Log($"Connected!", MsgLevel.Success);
                 }
                 else
                 {
@@ -56,7 +62,7 @@ namespace DanielXOO.ShopParser
                     Service.Log($"Not connected!", MsgLevel.Error);
                 }
             }
-            catch(PingException ex)
+            catch (PingException ex)
             {
                 Service.Log(ex.ToString(), MsgLevel.Error);
 

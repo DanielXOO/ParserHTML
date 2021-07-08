@@ -8,9 +8,9 @@ namespace DanielXOO.ShopParser.Service
         {
             switch (lvl)
             {
-                case MsgLevel.Info:
+                case MsgLevel.Success:
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"{DateTime.Now} | Info | {msg}");
+                    Console.WriteLine($"{DateTime.Now} | Success | {msg}");
                     break;
                 case MsgLevel.Warning:
                     Console.ForegroundColor = ConsoleColor.Yellow;

@@ -4,6 +4,6 @@ namespace DanielXOO.ShopParser
 {
     interface IDataParser
     {
-        IData[] FilterData(IDataProvider DOM);
+        IEnumerable<IData> FilterData(IDataProvider DOM);
     }
 }
