@@ -11,18 +11,28 @@ namespace DanielXOO.ShopParser
             var doc = new HtmlDocument();
             doc.LoadHtml(DOM.GetData());
 
-            var nameList = doc.DocumentNode.SelectNodes("//span[@class='prod-tv__name']");
-            var priceList = doc.DocumentNode.SelectNodes("//div[@class='prod-tv__price']");
+            var nameList = doc.DocumentNode.SelectNodes("//a[@class='prod__link']");
+            var priceList = doc.DocumentNode.SelectNodes("//a[@class='money__val']");
 
-            var data = new List<Product>();
-            var prodNames = from name in nameList
-                            select new Product()
-                            {
-                                Name = name.InnerText,
-                            };
-            var res = prodNames.Zip(priceList,
-                (name, price) => new Product() { Name = name.Name, Price = price.InnerText }
-                );
+            IEnumerable<Product> res;
+
+            if(nameList != null && priceList != null)
+            {
+                var data = new List<Product>();
+                var prodNames = from name in nameList
+                                select new Product()
+                                {
+                                    Name = name.InnerText,
+                                };
+                res = prodNames.Zip(priceList,
+                    (name, price) => new Product() { Name = name.Name, Price = price.InnerText }
+                    );
+            }
+            else
+            {
+                res = null;
+            }
+
             return res;
         }
     }

@@ -1,5 +1,5 @@
-﻿using DanielXOO.ShopParser.Controller;
-using DanielXOO.ShopParser.Service;
+﻿using DanielXOO.ShopParser.Service;
+using System;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -9,22 +9,20 @@ namespace DanielXOO.ShopParser
     class OpenProvider : IDataProvider
     {
         private IService Service;
-        private IController URL;
-        public string Link { get; set; }
+        public Uri Link { get; set; }
 
         public OpenProvider(string src)
         {
             Service = new ConsoleService();
-            URL = new OnlineShopController();
-            if (!string.IsNullOrEmpty(src))
+            if(string.IsNullOrWhiteSpace(src))
             {
-                Link = src;
+                Service.Log("Bad Link", MsgLevel.Error);
             }
             else
             {
-                Service.Log("Incorrect string", MsgLevel.Error);
-                Link = " ";
+                Link = new Uri(src);
             }
+          
         }
 
         public string GetData()
@@ -48,7 +46,7 @@ namespace DanielXOO.ShopParser
             var send = new Ping();
             try
             {
-                PingReply reply = send.Send(URL.GetRoot(Link), timeout: 120, buf);
+                PingReply reply = send.Send(Link.Host, timeout: 120, buf);
                 if (reply.Status == IPStatus.Success)
                 {
                     Service.Log($"Address: {Link}", MsgLevel.Success);

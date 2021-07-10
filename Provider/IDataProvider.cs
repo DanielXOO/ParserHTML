@@ -1,10 +1,10 @@
-﻿using DanielXOO.ShopParser.Service;
+﻿using System;
 
 namespace DanielXOO.ShopParser
 {
     interface IDataProvider
     {
-        string Link { get; set; }
+        Uri Link { get; set; }
         string GetData();
         void CheckPing();
 

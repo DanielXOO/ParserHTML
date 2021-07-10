@@ -2,7 +2,7 @@
 {
     interface IData
     {
-        string Source {get; set;}
+        string Source { get; set; }
         string SerializeData();
     }
 }
