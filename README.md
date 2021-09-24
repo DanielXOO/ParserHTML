@@ -7,4 +7,4 @@
 #### Пример ссылки для парсинга: https://komp.1k.by/mobile-pctablets/
 ### Запуск
 В папке с прокетом запустить команду в Powershell
-<dotnet run>
+<div>dotnet run</div>
