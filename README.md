@@ -6,7 +6,7 @@
 ![image](https://user-images.githubusercontent.com/42521707/125164137-683ce800-e199-11eb-9238-56a5a2134df1.png)
 #### Пример ссылки для парсинга: https://komp.1k.by/mobile-pctablets/
 ### Запуск
-В папке с прокетом запустить команду в Powershell
+В папке с проектом запустить команду в Powershell
 ```
 dotnet run
 ```
